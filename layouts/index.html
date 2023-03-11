@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    
+      
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/particles.min.js"></script>
+    <script src="/js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+      
+  
+    
+
+
+    <title>{{- .Site.Title -}}</title>
+    {{ $siteDescription := .Site.Params.description }}
+    {{ if (index .Site.Data .Site.Language.Lang).site }}
+      {{ $siteConfig := (index .Site.Data .Site.Language.Lang).site }}
+      {{ if $siteConfig.description }}
+        {{ $siteDescription = $siteConfig.description }}
+      {{ end }}
+    {{ end }}
+    <meta name="description" content="{{ $siteDescription }}" />
+    
+    <!-- import common headers -->
+    {{- partial "header.html" . -}}
+    {{- partial "opengraph.html" . -}}
+    
+    <!--================= add analytics if enabled =========================-->
+    {{- partial "analytics.html" . -}}
+  </head>
+  <body data-spy="scroll" data-target="#top-navbar" data-offset="100">
+
+    <!--- NAVBAR ------------------------->
+    {{- partial "navigators/navbar.html" . -}}
+
+    <!--- ADD HOME SECTION ---------------->
+    {{- partial "sections/home.html" . -}}
+
+    <!--- ADD OPTIONAL SECTIONS ----------->
+    {{ $sections:= site.Data.sections }}
+    {{ if (index site.Data site.Language.Lang).sections }}
+      {{ $sections = (index site.Data site.Language.Lang).sections }}
+    {{ end }}
+
+    {{ if $sections }}
+      {{ $background:= "bg-white"}}
+      {{ range sort $sections "section.weight" }}
+        {{ if .section.enable }}
+          <div class="container-fluid section-holder d-flex {{ $background }}">
+            {{ if .section.template }}
+              {{- partial .section.template . -}}
+            {{ else }}
+              {{- partial (printf "sections/%s.html" (replace (lower .section.id) " " "-")) . -}}
+            {{ end }}
+          </div>
+          <!--- alter background color for next section --->
+          {{ if eq $background "bg-white" }}
+            {{ $background = "bg-dimmed" }}
+          {{ else }}
+            {{ $background = "bg-white" }}
+          {{end}}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    <!--- ADD FOOTER ----------------------->
+    {{ $footerTemplate:= site.Params.footer.template | default "footer.html" }}
+    {{- partial $footerTemplate . -}}
+
+    <!--- ADD COMMON SCRIPTS --------------->
+    {{ partial "scripts.html" . }}
+  
+
+   
+
+
+    <!--- ADD INDEX PAGE SPECIFIC SCRIPTS -->
+    <script src="/js/itype.min.js"></script>
+    <script src="/js/github-button.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/jquery.filterizr.min.js"></script>
+    <script src="/js/particles.min.js"></script>
+    <script src="/js/particles.js"></script>
+
+
+  </body>
+</html>

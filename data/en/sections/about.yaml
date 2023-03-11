@@ -1,0 +1,56 @@
+# section information
+section:
+  name: About
+  #id: about
+  enable: true
+  weight: 1
+  showOnNavbar: true
+  template: sections/about.html
+
+# your designation
+designation: Data Science & Engineering Student
+# your company information
+company:
+  name: KTH Royal Institute of Technology
+  url: "https://www.kth.se/en/studies/exchange/general/double-degree-1.619496"
+
+# your resume. this file path should be relative to you "static" directory
+resume: "files/cv.pdf"
+
+# a summary about you
+summary: ' Hi! I am Zineb and I am a double degree Student in Computer Science with Machine Learning specialization. My current interests range from Data Engineering to ML & DL modeling.'
+
+# your social links
+# give as many as you want. use font-awesome for the icons.
+socialLinks:
+- name: Github
+  icon: "fab fa-github"
+  url: "https://www.github.com/ZinebSN"
+
+- name: Gitlab
+  icon: "fab fa-gitlab"
+  url: "https://gitlab.eurecom.fr/senane"
+
+- name: LinkedIN
+  icon: "fab fa-linkedin"
+  url: "https://www.linkedin.com/in/zineb-senane-9659aa1b7/"
+
+# your soft skills
+# give the percentage between 50 to 100 with 5 intervals.
+# currently supported colors: blue, yellow, pink, green, sky, orange
+softSkills:
+- name: Team Work
+  percentage: 90
+  color: red
+- name: Hard Working
+  percentage: 90
+  color: sky
+- name: Fast Learning
+  percentage: 95
+  color: pink
+- name: Problem Solving
+  percentage: 85
+  color: blue
+- name: Challenger
+  percentage: 85
+  color: yellow
